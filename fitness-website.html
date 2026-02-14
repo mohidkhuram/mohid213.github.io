@@ -3,336 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitPulse - Transform Your Body</title>
+    <title>DubForge AI - Video Dubber</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0b1020;
+            --card: #141b33;
+            --card-soft: #1b2445;
+            --accent: #7c5cff;
+            --accent-2: #28d2ff;
+            --text: #eef2ff;
+            --muted: #b6c1ff;
+            --ok: #16c47f;
+            --warn: #ffb020;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            overflow-x: hidden;
+            font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at top right, #1f2b5f 0%, var(--bg) 50%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+            padding-bottom: 40px;
         }
-        
+
+        .container { width: min(1100px, 92%); margin: 0 auto; }
+
         header {
-            padding: 20px 50px;
+            padding: 28px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
         }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #ffd700;
-        }
-        
+
+        .logo { font-weight: 800; font-size: 1.35rem; letter-spacing: 0.4px; }
+        .logo span { color: var(--accent-2); }
+
         .hero {
-            text-align: center;
-            padding: 100px 20px;
-            animation: fadeIn 1s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .hero p {
-            font-size: 22px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        
-        .cta-button {
-            background: #ffd700;
-            color: #333;
-            padding: 15px 40px;
-            font-size: 18px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
-        }
-        
-        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 80px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 28px;
+            align-items: center;
+            margin: 16px 0 30px;
         }
-        
-        .feature-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s, background 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
+
+        .hero h1 { font-size: clamp(2rem, 4.2vw, 3.4rem); margin-bottom: 12px; }
+        .hero p { color: var(--muted); max-width: 60ch; }
+
+        .badge {
+            display: inline-block;
+            background: rgba(124,92,255,0.18);
+            color: #d7ceff;
+            border: 1px solid rgba(124,92,255,0.55);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.84rem;
+            margin-bottom: 14px;
         }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.15);
-        }
-        
-        .feature-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .bmi-calculator {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 40px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .bmi-calculator h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-        
-        .input-group input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-        
-        .calculate-btn {
-            width: 100%;
-            padding: 15px;
-            background: #ffd700;
-            color: #333;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .calculate-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        .result {
-            margin-top: 20px;
+
+        .hero-card {
+            background: linear-gradient(145deg, #1b2445, #121933);
+            border: 1px solid #2a3460;
+            border-radius: 18px;
             padding: 20px;
-            background: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+        }
+
+        .spark {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .spark div {
+            height: 90px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(40,210,255,0.35), rgba(124,92,255,0.1));
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        .spark div:nth-child(2) { animation-delay: 0.2s; }
+        .spark div:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        .studio {
+            background: rgba(20,27,51,0.9);
+            border: 1px solid #2a3460;
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .studio h2 { margin-bottom: 14px; font-size: 1.35rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.92rem; }
+
+        input, select, textarea, button {
+            width: 100%;
             border-radius: 10px;
-            text-align: center;
+            border: 1px solid #334070;
+            background: #101733;
+            color: var(--text);
+            padding: 10px 12px;
+            font: inherit;
+        }
+
+        textarea { min-height: 96px; resize: vertical; }
+
+        .row { margin-bottom: 14px; }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover { transform: translateY(-1px); }
+
+        .progress-wrap {
+            margin-top: 16px;
+            background: #0d1430;
+            border-radius: 999px;
+            border: 1px solid #2c3966;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0;
+            height: 12px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width 0.4s ease;
+        }
+
+        .status {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            min-height: 20px;
+        }
+
+        .output {
+            margin-top: 18px;
+            background: var(--card-soft);
+            border: 1px solid #334070;
+            border-radius: 12px;
+            padding: 16px;
             display: none;
         }
-        
-        .result.show {
-            display: block;
-            animation: slideUp 0.5s;
+
+        .output.show { display: block; }
+
+        .chip {
+            display: inline-block;
+            background: rgba(22,196,127,0.18);
+            color: #93f2cb;
+            border: 1px solid rgba(22,196,127,0.55);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
         }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
+
         footer {
+            margin-top: 26px;
             text-align: center;
-            padding: 40px;
-            background: rgba(0,0,0,0.3);
-            margin-top: 80px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">💪 FitPulse</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#calculator">BMI Calculator</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    
-    <section class="hero" id="home">
-        <h1>Transform Your Body, Transform Your Life</h1>
-        <p>Start your fitness journey today with personalized workouts and expert guidance</p>
-        <button class="cta-button">Get Started Free</button>
-    </section>
-    
-    <section class="features" id="features">
-        <div class="feature-card">
-            <div class="feature-icon">🏋️</div>
-            <h3>Custom Workouts</h3>
-            <p>Get personalized workout plans tailored to your fitness level and goals. From beginner to advanced, we've got you covered.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🥗</div>
-            <h3>Nutrition Plans</h3>
-            <p>Balanced meal plans designed by nutritionists to fuel your body and help you reach your fitness goals faster.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Track Progress</h3>
-            <p>Monitor your journey with detailed analytics. See your improvements in strength, endurance, and body composition.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h3>Community Support</h3>
-            <p>Join thousands of members on the same journey. Share tips, celebrate wins, and stay motivated together.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Goal Setting</h3>
-            <p>Set realistic goals and crush them. Our smart system helps you stay on track with daily challenges and reminders.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🏆</div>
-            <h3>Expert Coaching</h3>
-            <p>Access certified trainers who provide guidance, answer questions, and keep you accountable every step of the way.</p>
-        </div>
-    </section>
-    
-    <section class="bmi-calculator" id="calculator">
-        <h2>BMI Calculator</h2>
-        <div class="input-group">
-            <label>Weight (kg)</label>
-            <input type="number" id="weight" placeholder="Enter your weight">
-        </div>
-        <div class="input-group">
-            <label>Height (cm)</label>
-            <input type="number" id="height" placeholder="Enter your height">
-        </div>
-        <button class="calculate-btn" onclick="calculateBMI()">Calculate BMI</button>
-        <div class="result" id="result">
-            <h3 id="bmi-value"></h3>
-            <p id="bmi-category"></p>
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 FitPulse. Transform your life, one rep at a time.</p>
-    </footer>
-    
+    <div class="container">
+        <header>
+            <div class="logo">🎬 Dub<span>Forge</span> AI</div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <div class="badge">AI Voice Translation + Lip-Sync Ready</div>
+                <h1>Launch your AI Video Dubber prototype in minutes.</h1>
+                <p>Upload a clip, auto-transcribe speech, translate into a target language, and create a synthetic dubbed track. This demo simulates the end-to-end dubbing workflow you can wire to Whisper, GPT translation, and TTS providers.</p>
+            </div>
+            <div class="hero-card">
+                <h3 style="margin-bottom:12px;">Pipeline Preview</h3>
+                <div class="spark">
+                    <div title="Transcription"></div>
+                    <div title="Translation"></div>
+                    <div title="Synthesis"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="studio">
+            <h2>AI Video Dubber Studio</h2>
+            <div class="grid">
+                <div class="row">
+                    <label for="videoFile">Input Video</label>
+                    <input id="videoFile" type="file" accept="video/*">
+                </div>
+                <div class="row">
+                    <label for="sourceLang">Source Language</label>
+                    <select id="sourceLang">
+                        <option>Auto detect</option>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Spanish</option>
+                        <option>Arabic</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="targetLang">Target Language</label>
+                    <select id="targetLang">
+                        <option>English</option>
+                        <option selected>Spanish</option>
+                        <option>French</option>
+                        <option>German</option>
+                        <option>Japanese</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="voiceType">Voice Model</label>
+                    <select id="voiceType">
+                        <option>Natural Male - Neural V4</option>
+                        <option selected>Natural Female - Neural V4</option>
+                        <option>Expressive Narrator - Studio</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="notes">Creative Notes (tone, style, audience)</label>
+                <textarea id="notes" placeholder="Example: Keep it friendly and energetic. Preserve product names in English."></textarea>
+            </div>
+
+            <button id="dubBtn">Generate Dub Track</button>
+
+            <div class="progress-wrap" aria-label="progress bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <p class="status" id="status">Idle — waiting for input.</p>
+
+            <div class="output" id="output">
+                <span class="chip">Dub complete</span>
+                <p id="summary"></p>
+                <div style="margin-top: 12px;">
+                    <button id="downloadManifest">Download job manifest (.json)</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            Demo only: this UI simulates processing locally. Connect to your own ASR, translation, and TTS APIs for production.
+        </footer>
+    </div>
+
     <script>
-        function calculateBMI() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value) / 100;
-            
-            if (!weight || !height || weight <= 0 || height <= 0) {
-                alert('Please enter valid weight and height values!');
+        const dubBtn = document.getElementById('dubBtn');
+        const progressEl = document.getElementById('progress');
+        const statusEl = document.getElementById('status');
+        const outputEl = document.getElementById('output');
+        const summaryEl = document.getElementById('summary');
+        const manifestBtn = document.getElementById('downloadManifest');
+
+        let lastManifest = null;
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function runDubSimulation() {
+            const file = document.getElementById('videoFile').files[0];
+            const source = document.getElementById('sourceLang').value;
+            const target = document.getElementById('targetLang').value;
+            const voice = document.getElementById('voiceType').value;
+            const notes = document.getElementById('notes').value.trim() || 'No notes provided.';
+
+            if (!file) {
+                alert('Please upload a video file first.');
                 return;
             }
-            
-            const bmi = (weight / (height * height)).toFixed(1);
-            let category = '';
-            let color = '';
-            
-            if (bmi < 18.5) {
-                category = 'Underweight';
-                color = '#64b5f6';
-            } else if (bmi >= 18.5 && bmi < 25) {
-                category = 'Normal weight';
-                color = '#4caf50';
-            } else if (bmi >= 25 && bmi < 30) {
-                category = 'Overweight';
-                color = '#ff9800';
-            } else {
-                category = 'Obese';
-                color = '#f44336';
+
+            outputEl.classList.remove('show');
+            dubBtn.disabled = true;
+
+            const phases = [
+                { pct: 18, text: 'Extracting audio from video stream...' },
+                { pct: 38, text: 'Transcribing speech with ASR model...' },
+                { pct: 62, text: `Translating script to ${target}...` },
+                { pct: 85, text: `Generating dubbed voice: ${voice}...` },
+                { pct: 100, text: 'Aligning and exporting final dub track...' }
+            ];
+
+            for (const phase of phases) {
+                progressEl.style.width = `${phase.pct}%`;
+                statusEl.textContent = phase.text;
+                await wait(700);
             }
-            
-            document.getElementById('bmi-value').textContent = `Your BMI: ${bmi}`;
-            document.getElementById('bmi-category').textContent = `Category: ${category}`;
-            document.getElementById('bmi-category').style.color = color;
-            
-            const resultDiv = document.getElementById('result');
-            resultDiv.classList.add('show');
+
+            const estimatedDuration = Math.max(8, Math.round(file.size / (1024 * 1024)));
+            lastManifest = {
+                app: 'DubForge AI Demo',
+                fileName: file.name,
+                sourceLanguage: source,
+                targetLanguage: target,
+                voiceModel: voice,
+                creativeNotes: notes,
+                estimatedProcessingSeconds: estimatedDuration,
+                generatedAt: new Date().toISOString(),
+                steps: ['audio_extraction', 'speech_to_text', 'translation', 'text_to_speech', 'timeline_alignment']
+            };
+
+            summaryEl.textContent = `"${file.name}" processed successfully. Ready to attach dubbed audio (${source} → ${target}) using ${voice}.`;
+            outputEl.classList.add('show');
+            statusEl.textContent = 'Done — prototype dub job completed.';
+            dubBtn.disabled = false;
         }
-        
-        // Smooth scroll for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+
+        function downloadManifest() {
+            if (!lastManifest) {
+                alert('Run a dub job first.');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(lastManifest, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dub-job-manifest.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        dubBtn.addEventListener('click', runDubSimulation);
+        manifestBtn.addEventListener('click', downloadManifest);
     </script>
 </body>
 </html>
